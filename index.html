@@ -300,9 +300,14 @@ main{padding-left:max(1.1rem, env(safe-area-inset-left)); padding-right:max(1.1r
       .ed:hover,.ed:focus{background:none;}
       .note-text{white-space:pre-wrap; font-size:0.82rem; line-height:1.65; color:var(--ink); background:var(--paper2); border:1.5px dashed var(--line); border-radius:10px; padding:0.55rem 0.75rem; margin-top:0.2rem;}
       .note-wrap{margin-top:0.2rem;}
-      .dwell{position:static !important; display:inline-block !important; margin:0.35rem 0 0 0.2rem !important; padding:0 !important; background:none !important; color:var(--pink-deep) !important; font-size:0.78rem;}
+      .dwell{position:static !important; display:inline-block !important; margin:0.35rem 0.8rem 0 0.2rem !important; padding:0 !important; background:none !important; color:var(--pink-deep) !important; font-size:0.78rem;}
+      .ticket-check{position:static !important; display:inline-block !important; margin:0.35rem 0.8rem 0 0.2rem !important; padding:0 !important; background:none !important; color:var(--pink-deep) !important; font-size:0.78rem;}
       .stop{padding-right:0 !important;}
-      body{padding-bottom:2rem;}
+      .sec-title{font-family:var(--f-hand); font-size:1.5rem; color:var(--pink-deep); margin:0 0 1rem;}
+      .ex-table tr.exc-row td.c-name{font-size:1rem;}
+      @media (max-width:720px){ .ex-table tr.exc-row td.c-date:has(.ed:empty){display:none;} }
+      body{padding-bottom:2.5rem;}
+      .friend-foot{text-align:center; font-size:0.78rem; color:var(--muted); padding:1rem 0 2rem;}
     </style></head>
 <body>
 
@@ -360,7 +365,8 @@ main{padding-left:max(1.1rem, env(safe-area-inset-left)); padding-right:max(1.1r
         
         <span>⏱ <span class="ed">搭車</span> <span class="ed">約1小時</span></span>
         
-        
+        <span>¥ <span class="ed">Skyliner：40M
+JR三山線：20M</span></span>
       </div>
       <div class="note-wrap">
         <div class="note-text">京成 Skyliner ➔ 「日暮里站」轉 JR 山手線外環線(池袋・新宿方向)-「高田馬場站」
@@ -381,7 +387,11 @@ JR 成田特快（N'EX）➔ 「新宿站」轉 JR 山手線外環線(池袋・�
         
         
       </div>
-      
+      <div class="note-wrap">
+        
+        
+        <label class="ticket-check checked">☑ 已訂購票券</label>
+      </div>
     </div></div>
     
     
@@ -392,12 +402,12 @@ JR 成田特快（N'EX）➔ 「新宿站」轉 JR 山手線外環線(池袋・�
     <span class="food-tag"><span class="ed">美食</span></span>
     <span class="food-name"><span class="ed"> 燒肉市場 げんかや 高田馬場店 (Yakiniku Genkaya)</span></span>
     <span class="food-hours">🕒 <span class="ed">17:00-23:30</span></span>
-    
+    <span class="food-note"><span class="ed">目前預約已滿</span></span>
   </div><div class="food-card" data-idx="1">
     <span class="food-tag"><span class="ed">美食</span></span>
     <span class="food-name"><span class="ed">Fry家（フライ家 炸豬排）</span></span>
     <span class="food-hours">🕒 <span class="ed">17:30～22:00</span></span>
-    
+    <span class="food-note"><span class="ed">目前是預約已滿</span></span>
   </div><div class="food-card" data-idx="2">
     <span class="food-tag"><span class="ed">超市</span></span>
     <span class="food-name"><span class="ed">西友 高田馬場店</span></span>
@@ -443,13 +453,13 @@ JR 成田特快（N'EX）➔ 「新宿站」轉 JR 山手線外環線(池袋・�
 搭乘JR山手線。(外環線：男性語音廣播、月台門上為2條綠色線條)
 JR高田馬場站（月台：通常為 2 號月台）</div>
         
-        
+        <label class="ticket-check checked">☑ 已訂購票券</label>
       </div>
     </div>
     <div class="stop">
       
       <div class="time"><span class="ed">8:20</span></div>
-      <div class="item"><span class="ed">新宿i-Land Tower</span></div>
+      <div class="item"><span class="ed">新宿i-Land Tower</span><span class="cost">🎫 <span class="ed">1573</span></span></div>
       <div class="meta">
         <span>🚃 <span class="ed">周遊巴士</span></span>
         
@@ -462,7 +472,7 @@ JR高田馬場站（月台：通常為 2 號月台）</div>
 KLOOK一日遊集合地點
 8:30集合 6-chōme-5-1 Nishishinjuku, Shinjuku City, Tokyo 163-1390, Japan</div>
         
-        
+        <label class="ticket-check checked">☑ 已訂購票券</label>
       </div>
     </div>
     <div class="stop">
@@ -476,7 +486,11 @@ KLOOK一日遊集合地點
         
         
       </div>
-      
+      <div class="note-wrap">
+        
+        
+        <label class="ticket-check checked">☑ 已訂購票券</label>
+      </div>
     </div>
     <div class="stop highlight">
       
@@ -490,7 +504,11 @@ KLOOK一日遊集合地點
         
         
       </div>
-      
+      <div class="note-wrap">
+        
+        
+        <label class="ticket-check checked">☑ 已訂購票券</label>
+      </div>
     </div>
     <div class="stop">
       
@@ -507,7 +525,7 @@ KLOOK一日遊集合地點
       <div class="note-wrap">
         <div class="note-text">「下吉田站」火車站搭到「河口湖站」</div>
         
-        
+        <label class="ticket-check checked">☑ 已訂購票券</label>
       </div>
     </div>
     <div class="stop highlight">
@@ -522,7 +540,11 @@ KLOOK一日遊集合地點
         
         
       </div>
-      
+      <div class="note-wrap">
+        
+        
+        <label class="ticket-check checked">☑ 已訂購票券</label>
+      </div>
     </div>
     <div class="stop">
       
@@ -539,7 +561,7 @@ KLOOK一日遊集合地點
       <div class="note-wrap">
         <div class="note-text">可以去吃午餐</div>
         
-        
+        <label class="ticket-check checked">☑ 已訂購票券</label>
       </div>
     </div>
     <div class="stop">
@@ -554,7 +576,11 @@ KLOOK一日遊集合地點
         
         
       </div>
-      
+      <div class="note-wrap">
+        
+        
+        <label class="ticket-check checked">☑ 已訂購票券</label>
+      </div>
     </div>
     <div class="stop">
       
@@ -617,7 +643,7 @@ L'Occitane(2F)、Nojima電器(11F)
         
         <span>⏱ <span class="ed">搭車</span> <span class="ed">約 45 分鐘</span></span>
         
-        
+        <span>¥ <span class="ed">650</span></span>
       </div>
       <div class="note-wrap">
         <div class="note-text">從「高田馬場站」搭乘JR山手線外環(池袋、新宿、澀谷方向)-「新宿站」
@@ -631,7 +657,7 @@ L'Occitane(2F)、Nojima電器(11F)
     <div class="stop highlight">
       
       <div class="time"><span class="ed">9:50～10:00</span></div>
-      <div class="item"><span class="ed">藤子・F・不二雄博物館</span></div>
+      <div class="item"><span class="ed">藤子・F・不二雄博物館</span><span class="cost">🎫 <span class="ed">1221</span></span></div>
       <div class="meta">
         <span>🚃 <span class="ed">參觀</span></span>
         
@@ -642,9 +668,10 @@ L'Occitane(2F)、Nojima電器(11F)
       </div>
       <div class="note-wrap">
         <div class="note-text">如果到「登戶站」還早可以先去附近吃早餐再去搭接駁巴士
-票券時間為10:00</div>
+票券時間為10:00
+票券在EMAIL裡面Exit.com</div>
         <span class="dwell">⏳ 停留 <span class="ed">3小時</span></span>
-        
+        <label class="ticket-check checked">☑ 已訂購票券</label>
       </div>
     </div>
     <div class="stop">
@@ -656,7 +683,7 @@ L'Occitane(2F)、Nojima電器(11F)
         
         <span>⏱ <span class="ed">搭車</span> <span class="ed">約 40-45 分鐘</span></span>
         
-        
+        <span>¥ <span class="ed">490</span></span>
       </div>
       <div class="note-wrap">
         <div class="note-text">接駁車坐回「登戶站」-JR南武線往川崎方向到「川崎站」
@@ -668,7 +695,7 @@ L'Occitane(2F)、Nojima電器(11F)
     <div class="stop">
       
       <div class="time"><span class="ed">13:00</span></div>
-      <div class="item"><span class="ed">吃飯時間</span></div>
+      <div class="item"><span class="ed">吃飯時間</span><span class="cost">🎫 <span class="ed">0</span></span></div>
       <div class="meta">
         <span>🚃 <span class="ed">午餐</span></span>
         
@@ -687,13 +714,13 @@ L'Occitane(2F)、Nojima電器(11F)
     <div class="stop">
       
       <div class="time"><span class="ed">14:00</span></div>
-      <div class="item"><span class="ed">YOKOHAMA AIR CABIN</span></div>
+      <div class="item"><span class="ed">YOKOHAMA AIR CABIN</span><span class="cost">🎫 <span class="ed">201</span></span></div>
       <div class="meta">
         <span>🚃 <span class="ed">走路、纜車</span></span>
         
         <span>⏱ <span class="ed">搭車</span> <span class="ed">約5分鐘</span></span>
         
-        
+        <span>¥ <span class="ed">０</span></span>
       </div>
       <div class="note-wrap">
         <div class="note-text">纜車搭乘地方：「櫻木町站」
@@ -706,13 +733,13 @@ KKDAY套票</div>
     <div class="stop highlight">
       
       <div class="time"><span class="ed">14:30</span></div>
-      <div class="item"><span class="ed">COSMO CLOCK 21</span></div>
+      <div class="item"><span class="ed">COSMO CLOCK 21</span><span class="cost">🎫 <span class="ed">201</span></span></div>
       <div class="meta">
         <span>🚃 <span class="ed">走路、搭乘摩天輪</span></span>
         
         <span>⏱ <span class="ed">搭車</span> <span class="ed">約2分鐘</span></span>
         
-        
+        <span>¥ <span class="ed">０</span></span>
       </div>
       <div class="note-wrap">
         <div class="note-text">摩天輪搭乘地方：「運河公園」
@@ -726,7 +753,7 @@ KKDAY套票</div>
     <div class="stop">
       
       <div class="time"><span class="ed">16:30</span></div>
-      <div class="item"><span class="ed">港未來、紅磚倉庫</span></div>
+      <div class="item"><span class="ed">港未來、紅磚倉庫</span><span class="cost">🎫 <span class="ed">0</span></span></div>
       <div class="meta">
         <span>🚃 <span class="ed">散步、拍照</span></span>
         
@@ -816,7 +843,7 @@ KKDAY套票</div>
         
         <span>⏱ <span class="ed">搭車</span> <span class="ed">25-30分鐘</span></span>
         
-        
+        <span>¥ <span class="ed">253日幣</span></span>
       </div>
       <div class="note-wrap">
         <div class="note-text">JR山手線「高田馬場站」(外環)往池袋/上野方向-「秋葉原站」</div>
@@ -852,7 +879,7 @@ Jonathan's Akihabara</div>
         
         <span>⏱ <span class="ed">步行</span> <span class="ed">約7分鐘</span></span>
         
-        
+        <span>¥ <span class="ed">0</span></span>
       </div>
       <div class="note-wrap">
         <div class="note-text">從 JR「秋葉原站」（電器街口）步行約 7 分鐘
@@ -870,7 +897,7 @@ Denny's 早午餐步行約14分鐘</div>
         
         <span>⏱ <span class="ed">搭車</span> <span class="ed">5分鐘</span></span>
         
-        
+        <span>¥ <span class="ed">230日幣</span></span>
       </div>
       <div class="note-wrap">
         <div class="note-text">*「秋葉原站」搭乘筑波快線-「淺草站」
@@ -890,7 +917,7 @@ Denny's 早午餐步行約14分鐘</div>
         
         <span>⏱ <span class="ed">搭車</span> <span class="ed">3分鐘</span></span>
         
-        
+        <span>¥ <span class="ed">178日幣</span></span>
       </div>
       <div class="note-wrap">
         <div class="note-text">淺草寺：「淺草站」步行約1分鐘
@@ -904,7 +931,7 @@ Denny's 早午餐步行約14分鐘</div>
     <div class="stop">
       
       <div class="time"><span class="ed">14:30</span></div>
-      <div class="item"><span class="ed">墨田水族館</span></div>
+      <div class="item"><span class="ed">墨田水族館</span><span class="cost">🎫 <span class="ed">2595</span></span></div>
       <div class="meta">
         <span>🚃 <span class="ed">走路</span></span>
         
@@ -922,13 +949,13 @@ Denny's 早午餐步行約14分鐘</div>
     <div class="stop">
       
       <div class="time"><span class="ed">16:00</span></div>
-      <div class="item"><span class="ed">晴空塔</span></div>
+      <div class="item"><span class="ed">晴空塔</span><span class="cost">🎫 <span class="ed">0</span></span></div>
       <div class="meta">
         <span>🚃 <span class="ed">都營淺草線</span></span>
         
         <span>⏱ <span class="ed">搭車</span> <span class="ed">15分鐘</span></span>
         
-        
+        <span>¥ <span class="ed">日幣220</span></span>
       </div>
       <div class="note-wrap">
         <div class="note-text">祇園辻利(在晴空塔裡面)
@@ -986,19 +1013,19 @@ Denny's 早午餐步行約14分鐘</div>
         
         <span>⏱ <span class="ed">搭車</span> <span class="ed">50分鐘</span></span>
         
-        
+        <span>¥ <span class="ed">178</span></span>
       </div>
       <div class="note-wrap">
         <div class="note-text">從「東銀座站」搭乘日比谷線(中目黑方向) 前往「六本木站」
 19:50-55一定要去坐車。</div>
         <span class="dwell">⏳ 停留 <span class="ed">１小時</span></span>
-        
+        <label class="ticket-check checked">☑ 已訂購票券</label>
       </div>
     </div>
     <div class="stop">
       
       <div class="time"><span class="ed">21:00</span></div>
-      <div class="item"><span class="ed">六本木之丘＋森大樓夜景</span></div>
+      <div class="item"><span class="ed">六本木之丘＋森大樓夜景</span><span class="cost">🎫 <span class="ed">2442</span></span></div>
       <div class="meta">
         <span>🚃 <span class="ed">—</span></span>
         
@@ -1007,7 +1034,8 @@ Denny's 早午餐步行約14分鐘</div>
         
       </div>
       <div class="note-wrap">
-        <div class="note-text">門票需要從官方點，21:00門票</div>
+        <div class="note-text">門票需要從官方點，21:00門票
+有購買學生票要帶學生證</div>
         
         
       </div>
@@ -1104,4 +1132,15 @@ Denny's 早午餐步行約14分鐘</div>
 
 
 
-<script>(function(){var b=document.querySelectorAll('.daynav button'),p=document.querySelectorAll('main > .panel');b.forEach(function(x,i){x.addEventListener('click',function(){p.forEach(function(e,j){e.classList.toggle('active',i===j)});b.forEach(function(e,j){e.classList.toggle('active',i===j)});});});})();</script></body></html>
+<div class="friend-foot">東京自由行 · 行程分享</div><script>(function(){
+      var b=document.querySelectorAll('.daynav button'),p=document.querySelectorAll('main > .panel');
+      b.forEach(function(x,i){x.addEventListener('click',function(){p.forEach(function(e,j){e.classList.toggle('active',i===j)});b.forEach(function(e,j){e.classList.toggle('active',i===j)});});});
+      if(!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)){
+        var w=document.createElement('div');w.className='petals';w.setAttribute('aria-hidden','true');
+        for(var i=0;i<12;i++){var d=document.createElement('div');d.className='petal';d.style.left=(Math.random()*100)+'%';d.style.animationDuration=(9+Math.random()*9)+'s';d.style.animationDelay=(-Math.random()*14)+'s';d.style.setProperty('--sway',(Math.random()*60-10)+'px');var z=8+Math.random()*8;d.style.width=d.style.height=z+'px';w.appendChild(d);}
+        document.body.appendChild(w);
+      }
+      var t=document.createElement('button');t.className='to-top';t.type='button';t.textContent='↑';t.setAttribute('aria-label','回到頂端');
+      t.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});document.body.appendChild(t);
+      window.addEventListener('scroll',function(){t.classList.toggle('show',window.scrollY>500);},{passive:true});
+    })();</script><div class="petals" aria-hidden="true"><div class="petal" style="left: 11.7935%; animation-duration: 16.2962s; animation-delay: -10.4318s; --sway: 37.54936980997305px; height: 10.1609px; width: 10.1609px;"></div><div class="petal" style="left: 62.4425%; animation-duration: 15.5556s; animation-delay: -6.38312s; --sway: -4.142457221459486px; height: 12.3793px; width: 12.3793px;"></div><div class="petal" style="left: 31.1707%; animation-duration: 12.294s; animation-delay: -1.2569s; --sway: 19.89734797107657px; height: 8.39809px; width: 8.39809px;"></div><div class="petal" style="left: 7.56399%; animation-duration: 15.8941s; animation-delay: -7.86594s; --sway: -0.6056137797975225px; height: 8.53444px; width: 8.53444px;"></div><div class="petal" style="left: 34.4899%; animation-duration: 14.1098s; animation-delay: -11.8296s; --sway: 16.632019673782px; height: 15.7503px; width: 15.7503px;"></div><div class="petal" style="left: 73.9201%; animation-duration: 16.2647s; animation-delay: -6.47646s; --sway: 3.9643562776918095px; height: 15.8286px; width: 15.8286px;"></div><div class="petal" style="left: 58.4532%; animation-duration: 16.1934s; animation-delay: -13.7161s; --sway: 24.910943284127562px; height: 11.5945px; width: 11.5945px;"></div><div class="petal" style="left: 24.3802%; animation-duration: 14.3995s; animation-delay: -9.48678s; --sway: -3.3304036240231394px; height: 15.1539px; width: 15.1539px;"></div><div class="petal" style="left: 35.5553%; animation-duration: 14.2588s; animation-delay: -12.9279s; --sway: -1.3842127510023907px; height: 14.8447px; width: 14.8447px;"></div><div class="petal" style="left: 61.5459%; animation-duration: 11.9302s; animation-delay: -11.5074s; --sway: 4.009454705478014px; height: 11.5549px; width: 11.5549px;"></div><div class="petal" style="left: 82.1742%; animation-duration: 11.8227s; animation-delay: -1.39618s; --sway: -5.458559840592798px; height: 12.4414px; width: 12.4414px;"></div><div class="petal" style="left: 38.9055%; animation-duration: 17.9287s; animation-delay: -13.1003s; --sway: 25.16852033721255px; height: 9.50799px; width: 9.50799px;"></div></div><button class="to-top" type="button" aria-label="回到頂端">↑</button></body></html>
