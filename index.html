@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="zh-Hant"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#7ec4e8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Iansui&amp;family=Zen+Maru+Gothic:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+<title>東京自由行</title>
+<style>
+:root{
+  --pink:#7ec4e8; --pink-deep:#3b8fc7; --pink-pale:#e0f1fb;
+  --ink:#26323a; --paper:#f1f7fb; --paper2:#ffffff;
+  --line:#d3e5f1; --muted:#7d8c97; --sky:#9fb4ec;
+  --f-hand:'Iansui','Zen Maru Gothic','Helvetica Neue',sans-serif;
+  --f-round:'Zen Maru Gothic','Iansui','Helvetica Neue',sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --pink:#8fd0f0; --pink-deep:#a6dcf6; --pink-pale:#1f3342;
+    --ink:#e6eef3; --paper:#10181e; --paper2:#18232b;
+    --line:#2a3b48; --muted:#93a3ae; --sky:#a9b8f0;
+  }
+}
+:root[data-theme="dark"]{
+  --pink:#8fd0f0; --pink-deep:#a6dcf6; --pink-pale:#1f3342;
+  --ink:#e6eef3; --paper:#10181e; --paper2:#18232b;
+  --line:#2a3b48; --muted:#93a3ae; --sky:#a9b8f0;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px); font-size:120%;}
+*{box-sizing:border-box;}
+body{
+  margin:0; background-color:var(--paper); color:var(--ink);
+  background-image:radial-gradient(var(--line) 1px, transparent 1px);
+  background-size:15px 15px;
+  font-family:var(--f-round); min-height:100%; -webkit-font-smoothing:antialiased;
+}
+.sans{font-family:var(--f-round);}
+.hand{font-family:var(--f-hand);}
+
+.ed{outline:none; border-radius:4px; padding:0.02em 0.15em; transition:background .12s; white-space:pre-wrap; word-break:break-word; display:inline-block; max-width:100%;}
+.ed:hover{background:rgba(126,196,232,0.2);}
+.ed:focus{background:rgba(126,196,232,0.32);}
+.ed:empty::before{content:attr(data-placeholder); color:var(--muted); opacity:0.7;}
+.ed:empty{min-width:3em;}
+
+.hero{position:relative; overflow:hidden; padding:3.2rem 1.5rem 2rem; text-align:center;}
+.hero-banner{
+  display:inline-block; background:linear-gradient(135deg, var(--pink), var(--pink-deep));
+  color:#fff; padding:0.55rem 1.4rem; border-radius:30px; font-family:var(--f-hand);
+  font-size:0.95rem; margin-bottom:1.1rem; box-shadow:0 5px 14px rgba(59,143,199,0.3);
+}
+.hero h1{font-family:var(--f-hand); font-size:clamp(2.1rem,7vw,3rem); margin:0 0 0.3rem; font-weight:400; line-height:1.3;}
+.hero-date{font-family:var(--f-hand); font-size:1.15rem; color:var(--pink-deep); margin-bottom:0.5rem;}
+.hero .eng{font-family:var(--f-round); font-weight:900; letter-spacing:0.04em; color:var(--pink-deep); font-size:0.9rem; margin-bottom:1rem;}
+.hero p.sub{font-size:0.95rem; color:var(--muted); margin:0 auto 1.6rem; max-width:36ch; line-height:1.7;}
+.stats{display:flex; gap:1.6rem; justify-content:center; flex-wrap:wrap; margin-bottom:0.5rem;}
+.stats div{min-width:60px;}
+.stats .num{font-family:var(--f-hand); font-size:1.6rem; color:var(--pink-deep);}
+.stats .lbl{font-size:0.72rem; color:var(--muted);}
+.mascots{display:flex; justify-content:center; gap:1.4rem; margin-top:1.6rem;}
+
+.hint{text-align:center; font-size:0.76rem; color:var(--muted); padding:0.5rem 1rem;}
+
+.daynav{position:sticky; top:env(safe-area-inset-top,0px); z-index:10; background:var(--paper); border-bottom:2px dashed var(--line); padding:0.4rem 1rem;}
+.daynav-inner{max-width:760px; margin:0 auto; display:flex; gap:0.35rem; overflow-x:auto; scrollbar-width:none;}
+.daynav-inner::-webkit-scrollbar{display:none;}
+.daynav button{font-family:var(--f-hand); flex:0 0 auto; padding:0.5rem 1rem; border:none; background:transparent; color:var(--muted); font-size:0.85rem; cursor:pointer; border-radius:20px;}
+.daynav button.active{color:#fff; background:linear-gradient(135deg, var(--pink), var(--pink-deep));}
+
+main{max-width:760px; margin:0 auto; padding:2rem 1.5rem 4rem;}
+.panel{display:none;}
+.panel.active{display:block;}
+
+.day-intro{display:flex; gap:1.3rem; align-items:flex-start; flex-wrap:wrap; margin-bottom:1.8rem;}
+.day-intro .text{flex:1; min-width:190px;}
+.blob-frame{
+  width:120px; height:120px; flex:0 0 auto;
+  border-radius:58% 42% 61% 39% / 45% 55% 45% 55%;
+  background:var(--paper2); border:4px solid var(--paper2);
+  box-shadow:0 8px 18px rgba(0,0,0,0.12), 0 0 0 3px var(--pink-pale);
+  display:flex; align-items:center; justify-content:center;
+}
+.blob-frame svg{width:60%; height:60%;}
+.day-banner{
+  display:inline-block; background:linear-gradient(135deg, var(--pink), var(--pink-deep));
+  color:#fff; font-family:var(--f-hand); font-size:1.25rem; padding:0.5rem 1.1rem;
+  border-radius:12px; margin-bottom:0.7rem; box-shadow:0 4px 10px rgba(59,143,199,0.25);
+}
+.date-badge{
+  display:inline-flex; align-items:baseline; gap:0.35rem; border:2.5px solid var(--ink);
+  border-radius:10px; padding:0.28rem 0.65rem; font-family:var(--f-hand); font-size:1rem;
+  background:var(--paper2); margin:0 0 0.8rem 0.4rem;
+}
+.day-summary{font-size:0.92rem; color:var(--muted); line-height:1.7; margin:0;}
+
+.timeline{position:relative; padding-left:1.5rem; border-left:2px dashed var(--line);}
+.stop{position:relative; padding-bottom:1.8rem;}
+.stop:last-child{padding-bottom:0.2rem;}
+.stop::before{content:""; position:absolute; left:-1.62rem; top:0.3rem; width:10px; height:10px; border-radius:50%; background:var(--pink);}
+.stop.highlight::before{background:var(--pink-deep); box-shadow:0 0 0 4px var(--pink-pale);}
+.stop .time{font-family:var(--f-hand); font-size:0.95rem; color:var(--ink); font-weight:400; margin-bottom:0.2rem; display:inline-block;}
+.stop .cost{font-family:var(--f-round); font-size:0.78rem; color:var(--pink-deep); background:var(--pink-pale); border-radius:10px; padding:0.1rem 0.55rem; margin-left:0.5rem; display:inline-block;}
+.stop .item{font-size:1.02rem; margin-bottom:0.3rem; line-height:1.4; display:block;}
+.stop .meta{font-size:0.8rem; color:var(--muted); display:flex; gap:0.8rem; flex-wrap:wrap; margin-bottom:0.5rem;}
+.stop .meta span{display:inline-flex;align-items:center;gap:0.3rem;}
+.stop .meta .dot{color:var(--line);}
+.route-note{width:100%; resize:vertical; min-height:2.5rem; margin-top:0.2rem; font-family:var(--f-round); font-size:0.82rem; color:var(--ink); background:var(--paper2); border:1.5px dashed var(--line); border-radius:10px; padding:0.5rem 0.7rem; line-height:1.5;}
+.route-note::placeholder{color:var(--muted); opacity:0.75;}
+.route-note:focus{outline:none; border-color:var(--pink);}
+
+
+.img-box{margin-top:0.6rem; border:1.5px dashed var(--pink); border-radius:12px; padding:0.6rem; background:var(--paper2); outline:none; position:relative; text-align:center;}
+.img-box:focus{border-style:solid; box-shadow:0 0 0 3px var(--pink-pale);}
+.img-box .img-hint{display:block; font-size:0.72rem; color:var(--muted); margin-bottom:0.4rem; line-height:1.5;}
+.img-box .img-pick{font-family:var(--f-round); font-size:0.72rem; color:var(--pink-deep); background:var(--pink-pale); border:none; border-radius:16px; padding:0.35rem 0.9rem; cursor:pointer;}
+.img-box img{display:block; max-width:100%; border-radius:8px; margin:0 auto;}
+.img-box .img-del{position:absolute; top:0.4rem; right:0.4rem; width:1.6rem; height:1.6rem; border-radius:50%; border:none; background:rgba(0,0,0,0.55); color:#fff; cursor:pointer; font-size:0.7rem;}
+.img-grid{display:flex; flex-wrap:wrap; gap:0.5rem; justify-content:center;}
+.img-thumb{position:relative; width:76px; height:76px;}
+.img-thumb img{width:100%; height:100%; object-fit:cover; border-radius:8px; display:block;}
+.img-thumb .img-del{top:-6px; right:-6px; width:1.3rem; height:1.3rem; font-size:0.6rem;}
+.img-add-tile{width:76px; height:76px; border:1.5px dashed var(--pink); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1.5rem; color:var(--pink-deep); cursor:pointer; background:var(--pink-pale); flex:0 0 auto;}
+.pack-add{font-family:var(--f-round); font-size:0.8rem; color:var(--pink-deep); background:none; border:1.5px dashed var(--pink); border-radius:16px; padding:0.35rem 0.9rem; cursor:pointer; margin-top:0.3rem; align-self:flex-start;}
+
+.food-block{margin-top:2.2rem;}
+.hotel-block{margin-top:2.6rem; padding-top:1.4rem; border-top:2px dashed var(--line);}
+.food-block-title{font-family:var(--f-hand); font-size:1.15rem; color:var(--pink-deep); margin-bottom:0.9rem; display:flex; align-items:center; gap:0.4rem;}
+.food-cards{display:flex; flex-direction:column; gap:0.9rem; margin-bottom:0.8rem;}
+.food-card{background:var(--paper2); border:1.5px dashed var(--line); border-radius:16px; padding:0.9rem 1.1rem;}
+.food-tag{display:inline-block; background:var(--ink); color:var(--paper); font-size:0.68rem; padding:0.22rem 0.65rem; border-radius:20px; margin-bottom:0.5rem;}
+.food-name{font-family:var(--f-hand); font-size:1.05rem; color:var(--pink-deep); margin-bottom:0.2rem; display:block;}
+.food-hours{font-size:0.8rem; color:var(--muted); display:block; margin-bottom:0.15rem;}
+.food-note{font-size:0.8rem; color:var(--ink); display:block;}
+.add-btn{font-family:var(--f-round); font-size:0.82rem; color:var(--pink-deep); background:none; border:1.5px dashed var(--pink); border-radius:20px; padding:0.5rem 1rem; cursor:pointer; width:100%;}
+.add-btn:hover{background:var(--pink-pale);}
+.stop{padding-right:1.6rem;}
+.stop-del{position:absolute; top:-0.1rem; right:-0.2rem; width:1.5rem; height:1.5rem; border-radius:50%; border:none; background:var(--pink-pale); color:var(--pink-deep); font-size:0.7rem; cursor:pointer; line-height:1;}
+.stop-del:hover{background:var(--pink);color:#fff;}
+.add-stop{font-family:var(--f-hand); font-size:0.95rem; color:var(--pink-deep); background:none; border:1.5px dashed var(--pink); border-radius:16px; padding:0.5rem 1.1rem; cursor:pointer; margin-top:0.8rem; margin-left:0.1rem;}
+.add-stop:hover{background:var(--pink-pale);}
+.note-wrap{position:relative; margin-top:0.2rem;}
+.note-wrap .route-note{margin-top:0; padding-bottom:1.9rem;}
+.dwell{position:absolute; right:1.8rem; bottom:0.5rem; display:inline-flex; align-items:center; gap:0.3rem; font-size:0.76rem; color:var(--muted); background:var(--paper2); padding:0.1rem 0.4rem; border-radius:8px;}
+.ticket-check{position:absolute; left:0.7rem; bottom:0.5rem; display:inline-flex; align-items:center; gap:0.3rem; font-size:0.76rem; color:var(--muted); cursor:pointer; background:var(--paper2); padding:0.1rem 0.4rem; border-radius:8px;}
+.ticket-check input{width:14px; height:14px; accent-color:var(--pink-deep); cursor:pointer;}
+.ticket-check.checked{color:var(--pink-deep);}
+
+
+
+.pack-cat{margin-bottom:1.8rem;}
+.pack-cat h3{font-family:var(--f-hand); font-size:1.05rem; margin:0 0 0.7rem; color:var(--pink-deep); display:flex; align-items:center; gap:0.5rem;}
+.pack-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:0.55rem;}
+.pack-list li{display:flex; align-items:flex-start; gap:0.65rem; font-size:0.94rem; line-height:1.4;}
+.pack-list input[type=checkbox]{margin-top:0.25rem; width:16px; height:16px; accent-color:var(--pink-deep); flex:0 0 auto; cursor:pointer;}
+.pack-list .ed{flex:1;}
+.pack-list li.checked .ed{color:var(--muted); text-decoration:line-through; text-decoration-color:var(--line);}
+.pack-note{font-size:0.82rem; color:var(--muted); margin:0 0 1.6rem; line-height:1.6;}
+
+.hotel-card{background:var(--paper2); border:2px dashed var(--pink-pale); border-radius:18px; padding:1.3rem 1.3rem 0.5rem; margin-bottom:1.4rem;}
+.hotel-field{margin-bottom:1.05rem;}
+.hotel-field .flabel{font-size:0.74rem; color:var(--muted); margin-bottom:0.28rem; display:block;}
+.hotel-field .ed{display:block; font-size:1.02rem; padding:0.4rem 0.1rem; border-bottom:1.5px dashed var(--line); min-height:1.5em;}
+.hotel-row{display:flex; gap:1.1rem; flex-wrap:wrap;}
+.hotel-card{position:relative;}
+.card-actions{position:absolute; top:0.6rem; right:0.7rem; display:flex; gap:0.15rem; z-index:2;}
+.card-btn{width:1.6rem; height:1.6rem; border:none; background:var(--pink-pale); color:var(--pink-deep); font-size:0.7rem; cursor:pointer; border-radius:50%;}
+.card-btn:hover{background:var(--pink); color:#fff;}
+.photo-card{background:var(--paper2); border:2px dashed var(--pink-pale); border-radius:18px; padding:1.2rem 1.2rem 0.6rem; margin-bottom:1.5rem; position:relative;}
+.photo-card .img-box{margin-top:1.6rem;}
+.img-box.big .img-grid{flex-direction:column; align-items:stretch;}
+.img-box.big .img-thumb{width:100%; height:auto;}
+.img-box.big .img-thumb img{height:auto; object-fit:contain; border-radius:10px;}
+.img-box.big .img-add-tile{width:100%; height:2.8rem; font-size:1rem;}
+.photo-card .photo-text{margin-top:1rem;}
+.ex-wrap{overflow-x:auto; border:1.5px dashed var(--line); border-radius:14px; background:var(--paper2); margin-bottom:1rem;}
+.ex-table{border-collapse:collapse; min-width:780px; width:100%; font-size:0.9rem;}
+.ex-table th{text-align:left; font-weight:500; color:var(--muted); font-size:0.78rem; padding:0.65rem 0.7rem; border-bottom:1.5px solid var(--line); white-space:nowrap;}
+.ex-table td{padding:0.5rem 0.7rem; border-bottom:1px solid var(--line); vertical-align:top;}
+.ex-table td .ed{display:block; min-height:1.4em; min-width:3.5em;}
+.ex-table td.c-name{min-width:9rem;}
+.ex-table td.c-cat .ed, .ex-table td.c-who .ed{display:inline-block; background:var(--pink-pale); color:var(--pink-deep); border-radius:6px; padding:0.1rem 0.55rem; font-size:0.82rem;}
+.ex-table td.c-who .ed{background:var(--line); color:var(--ink);}
+.ex-table td.c-del{width:2rem; padding-left:0; text-align:center;}
+.ex-table .ex-del{width:1.4rem; height:1.4rem; border:none; border-radius:50%; background:var(--pink-pale); color:var(--pink-deep); font-size:0.65rem; cursor:pointer;}
+.ex-table .ex-del:hover{background:var(--pink); color:#fff;}
+.ex-table tfoot td{font-family:var(--f-hand); color:var(--pink-deep); border-bottom:none; padding-top:0.7rem; padding-bottom:0.7rem;}
+
+.exp-sum{display:flex; gap:0.6rem 1.4rem; flex-wrap:wrap; background:linear-gradient(135deg, var(--pink), var(--pink-deep)); color:#fff; border-radius:18px; padding:1rem 1.2rem; margin-bottom:1.5rem; box-shadow:0 5px 14px rgba(59,143,199,0.25);}
+.exp-sum .box{min-width:5.5rem;}
+.exp-sum .lb{font-size:0.7rem; opacity:0.9;}
+.exp-sum .vl{font-family:var(--f-hand); font-size:1.3rem;}
+.exp-sum .box.total{margin-left:auto; text-align:right;}
+.ex-table td.c-tj, .ex-table td.c-tt{white-space:nowrap; color:var(--pink-deep); font-family:var(--f-hand);}
+.ex-table td.c-jpy .ed, .ex-table td.c-twd .ed{white-space:nowrap;}
+.ex-table tr.cat-head td{background:var(--pink-pale); color:var(--pink-deep); font-family:var(--f-hand); font-size:1rem; padding:0.55rem 0.7rem; border-bottom:none;}
+.ex-table tr.cat-head .cat-title{display:inline-block; min-width:5em;}
+.ex-table tr.cat-head .cat-actions{float:right; display:inline-flex; gap:0.4rem;}
+.exc-btn{font-family:var(--f-round); font-size:0.72rem; color:var(--pink-deep); background:var(--paper2); border:1px dashed var(--pink); border-radius:12px; padding:0.15rem 0.6rem; cursor:pointer;}
+.exc-btn:hover{background:var(--pink); color:#fff;}
+.ex-table tr.cat-sub td{font-size:0.82rem; color:var(--muted); background:var(--paper); border-bottom:2px solid var(--line); white-space:nowrap;}
+.exp-sum .box .ed{font-family:var(--f-hand); font-size:1.3rem;}
+.ex-table .pp-line{white-space:nowrap; line-height:1.7;}
+.ex-table td .pp-line .ed{display:inline-block; min-width:4.5em;}
+.ex-table td.c-tot div, .ex-table td.s-tot div{white-space:nowrap; color:var(--pink-deep); font-family:var(--f-hand); line-height:1.7;}
+.ex-table td.s-pp div{white-space:nowrap; line-height:1.7;}
+.ex-table{min-width:640px;}
+.exp-sum .box{min-width:8rem;}
+#exc-table2 .exc-del-cat{display:none;}
+
+
+.exp-item{display:flex; align-items:baseline; gap:0.4rem 1rem; flex-wrap:wrap; background:var(--paper2); border:1.5px dashed var(--line); border-radius:14px; padding:0.65rem 2.6rem 0.65rem 1rem; margin-bottom:0.6rem; position:relative;}
+.exp-item .nm{flex:1; min-width:6rem; font-size:1rem;}
+.exp-item .am{color:var(--pink-deep); font-family:var(--f-hand); font-size:1rem;}
+.exp-item .exp-del{position:absolute; top:50%; right:0.6rem; transform:translateY(-50%); width:1.5rem; height:1.5rem; border:none; border-radius:50%; background:var(--pink-pale); color:var(--pink-deep); font-size:0.7rem; cursor:pointer;}
+.exp-item .exp-del:hover{background:var(--pink); color:#fff;}
+.exp-subtotal{margin-left:auto; font-size:0.9rem; color:var(--muted); font-family:var(--f-round);}
+.pack-cat h3{width:100%;}
+.exp-row{background:var(--paper2); border:1.5px dashed var(--line); border-radius:14px; padding:0.8rem 2.6rem 0.8rem 1rem; margin-bottom:0.7rem; position:relative;}
+.exp-row .r1{display:flex; gap:0.4rem 1rem; align-items:baseline; flex-wrap:wrap;}
+.exp-row .nm{flex:1; min-width:6rem; font-family:var(--f-hand); font-size:1.05rem;}
+.exp-row .am{color:var(--pink-deep); font-family:var(--f-hand); font-size:1.05rem;}
+.exp-row .nt{display:block; font-size:0.8rem; color:var(--muted); margin-top:0.35rem;}
+.exp-row .exp-del{position:absolute; top:0.6rem; right:0.6rem; width:1.5rem; height:1.5rem; border:none; border-radius:50%; background:var(--pink-pale); color:var(--pink-deep); font-size:0.7rem; cursor:pointer;}
+.exp-row .exp-del:hover{background:var(--pink); color:#fff;}
+
+
+.hotel-row .hotel-field{flex:1; min-width:150px;}
+
+footer{text-align:center; font-size:0.78rem; color:var(--muted); padding:1rem 0 2.6rem;}
+
+/* ---- mobile-first polish & Japan motifs ---- */
+*{-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{overflow-x:hidden;}
+button,.daynav button{min-height:36px;}
+.hero{padding-top:calc(2.6rem + env(safe-area-inset-top,0px));}
+.hero-art{position:relative; max-width:380px; margin:1.4rem auto 0;}
+.hero-art svg{display:block; width:100%; height:auto;}
+.hanko{position:absolute; top:-0.2rem; right:0.4rem; z-index:2; width:2.6rem; height:2.6rem; display:flex; align-items:center; justify-content:center; background:#d9534f; color:#fff; font-family:var(--f-hand); font-size:0.95rem; line-height:1.05; text-align:center; border-radius:6px; transform:rotate(8deg); box-shadow:0 3px 8px rgba(217,83,79,.35); padding:0.2rem;}
+.wave{display:block; margin-top:-2px;}
+.petals{position:fixed; inset:0; pointer-events:none; z-index:50; overflow:hidden;}
+.petal{position:absolute; top:-24px; width:11px; height:11px; background:#f7b6c6; border-radius:150% 0 150% 0; opacity:.85; animation:petalFall linear infinite;}
+@keyframes petalFall{
+  0%{transform:translate3d(0,-5vh,0) rotate(0deg);}
+  50%{transform:translate3d(var(--sway,30px),55vh,0) rotate(180deg);}
+  100%{transform:translate3d(calc(var(--sway,30px) * -0.6),108vh,0) rotate(360deg);}
+}
+@media (prefers-reduced-motion: reduce){ .petals{display:none;} html{scroll-behavior:auto;} }
+.to-top{position:fixed; right:calc(1rem + env(safe-area-inset-right,0px)); bottom:calc(1rem + env(safe-area-inset-bottom,0px)); z-index:60; width:2.8rem; height:2.8rem; border:none; border-radius:50%; background:linear-gradient(135deg,var(--pink),var(--pink-deep)); color:#fff; font-size:1rem; box-shadow:0 6px 16px rgba(59,143,199,.35); cursor:pointer; opacity:0; pointer-events:none; transition:opacity .2s;}
+.to-top.show{opacity:1; pointer-events:auto;}
+.day-banner::before{content:"⛩ "; opacity:.9;}
+.daynav{backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); background:color-mix(in srgb, var(--paper) 88%, transparent);}
+main{padding-left:max(1.1rem, env(safe-area-inset-left)); padding-right:max(1.1rem, env(safe-area-inset-right));}
+@media (max-width:480px){
+  html{font-size:112%;}
+  .hero h1{font-size:2.2rem;}
+  .stats{gap:1rem;}
+  .day-intro{gap:0.9rem;}
+  .blob-frame{width:92px; height:92px;}
+  .stop{padding-right:1.8rem;}
+  .meta{gap:0.5rem;}
+}
+@media (min-width:700px){
+  main{padding-top:2.4rem;}
+  .hero-art{max-width:460px;}
+  .blob-frame{width:140px; height:140px;}
+}
+
+/* ---- phone: expense table becomes stacked cards so nothing is cut off ---- */
+@media (max-width:720px){
+  .ex-wrap{overflow:visible; border:none; background:transparent;}
+  .ex-table, .ex-table tbody, .ex-table tr, .ex-table td{display:block; width:100%; min-width:0;}
+  .ex-table{min-width:0;}
+  .ex-table thead{display:none;}
+  .ex-table tbody.exc-cat{background:var(--paper2); border:1.5px dashed var(--line); border-radius:14px; margin-bottom:1rem; overflow:hidden;}
+  .ex-table tr.cat-head td{display:block; border-radius:0;}
+  .ex-table tr.cat-head .cat-actions{float:none; display:flex; margin-top:0.4rem;}
+  .ex-table tr.exc-row{position:relative; display:grid; grid-template-columns:1fr 1fr; gap:0.2rem 0.8rem; padding:0.7rem 2.4rem 0.7rem 0.9rem; border-bottom:1px solid var(--line);}
+  .ex-table tr.exc-row td{border:none; padding:0; min-width:0;}
+  .ex-table tr.exc-row td.c-name{grid-column:1 / -1; font-size:1rem;}
+  .ex-table tr.exc-row td.c-date{grid-column:1 / -1;}
+  .ex-table tr.exc-row td.c-pp::before, .ex-table tr.exc-row td.c-tot::before, .ex-table tr.exc-row td.c-date::before{display:block; font-size:0.68rem; color:var(--muted); font-family:var(--f-round);}
+  .ex-table tr.exc-row td.c-pp::before{content:'一人（日幣／台幣）';}
+  .ex-table tr.exc-row td.c-tot::before{content:'總共（日幣／台幣）';}
+  .ex-table tr.exc-row td.c-date::before{content:'付款日期';}
+  .ex-table tr.exc-row td.c-del{position:absolute; top:0.6rem; right:0.6rem; width:auto;}
+  .ex-table td .ed{min-width:2.5em;}
+  .ex-table tr.cat-sub{display:grid; grid-template-columns:auto 1fr 1fr; gap:0.2rem 0.8rem; padding:0.5rem 0.9rem;}
+  .ex-table tr.cat-sub td{border:none; padding:0; background:transparent;}
+  .ex-table tr.cat-sub td:nth-child(3), .ex-table tr.cat-sub td:nth-child(5){display:none;}
+}
+</style>
+<meta name="robots" content="noindex,nofollow"><style>
+      .ed{cursor:default; padding:0;}
+      .ed:hover,.ed:focus{background:none;}
+      .note-text{white-space:pre-wrap; font-size:0.82rem; line-height:1.65; color:var(--ink); background:var(--paper2); border:1.5px dashed var(--line); border-radius:10px; padding:0.55rem 0.75rem; margin-top:0.2rem;}
+      .note-wrap{margin-top:0.2rem;}
+      .dwell{position:static !important; display:inline-block !important; margin:0.35rem 0 0 0.2rem !important; padding:0 !important; background:none !important; color:var(--pink-deep) !important; font-size:0.78rem;}
+      .stop{padding-right:0 !important;}
+      body{padding-bottom:2rem;}
+    </style></head>
+<body>
+
+<div class="hero">
+  <h1><span class="ed" id="hero-title">東京自由行</span></h1>
+  
+  <div class="eng">TOKYO × MT. FUJI TRAVEL</div>
+  <p class="sub"><span class="ed" id="hero-sub">Takadanobaba-Shinjuku-Lake Kawaguchi 
+-Yokohama-Asakusa-Ginza</span></p>
+  <div class="stats">
+    <div><div class="num ed" id="stat1-num">5</div><div class="lbl ed" id="stat1-lbl">天 4 夜</div></div>
+    <div><div class="num ed" id="stat2-num">1</div><div class="lbl ed" id="stat2-lbl">趟家族旅遊</div></div>
+    <div><div class="num ed" id="stat3-num">∞</div><div class="lbl ed" id="stat3-lbl">滿滿回憶</div></div>
+  </div>
+  <div class="hero-art" aria-hidden="true">
+    <div class="hanko">東京</div>
+    <svg viewBox="0 0 360 150" preserveAspectRatio="xMidYMax meet">
+      <defs>
+        <linearGradient id="fj" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fb0e0"></stop><stop offset="1" stop-color="#4f8cc4"></stop></linearGradient>
+        <linearGradient id="lk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a9d6f0"></stop><stop offset="1" stop-color="#7ec4e8"></stop></linearGradient>
+      </defs>
+      <circle cx="262" cy="42" r="22" fill="#f7a8b8" opacity=".9"></circle>
+      <ellipse cx="70" cy="40" rx="30" ry="9" fill="#fff" opacity=".85"></ellipse><ellipse cx="92" cy="34" rx="20" ry="8" fill="#fff" opacity=".85"></ellipse>
+      <ellipse cx="300" cy="78" rx="26" ry="7" fill="#fff" opacity=".8"></ellipse>
+      <path d="M40 128 L150 40 Q180 18 210 40 L320 128 Z" fill="url(#fj)"></path>
+      <path d="M150 40 Q180 18 210 40 L198 52 L188 44 L178 56 L166 46 L158 54 Z" fill="#fff"></path>
+      <rect x="0" y="126" width="360" height="24" fill="url(#lk)"></rect>
+      <path d="M60 138 q10 -5 20 0 t20 0 t20 0 M200 142 q10 -5 20 0 t20 0 t20 0" stroke="#fff" stroke-width="1.5" fill="none" opacity=".8"></path>
+      <g fill="#e46a7a"><rect x="28" y="92" width="4" height="36"></rect><rect x="52" y="92" width="4" height="36"></rect><rect x="22" y="90" width="40" height="5" rx="1"></rect><rect x="26" y="99" width="32" height="3"></rect></g>
+      <g fill="#f7a8b8"><circle cx="318" cy="96" r="9"></circle><circle cx="328" cy="104" r="8"></circle><circle cx="310" cy="106" r="8"></circle></g>
+      <rect x="320" y="108" width="3" height="20" fill="#9a7b6a"></rect>
+    </svg>
+  </div>
+  <svg class="wave" width="100%" height="24" aria-hidden="true"><defs><pattern id="sg" width="40" height="20" patternUnits="userSpaceOnUse"><path d="M0 20a20 20 0 0 1 40 0M10 20a10 10 0 0 1 20 0" fill="none" stroke="var(--pink)" stroke-width="1.6" opacity=".7"></path></pattern></defs><rect width="100%" height="24" fill="url(#sg)"></rect></svg>
+</div>
+
+<nav class="daynav"><div class="daynav-inner" id="daynav"><button class="active">Day1</button><button>Day2</button><button>Day3</button><button>Day4</button><button>Day5</button></div></nav>
+
+<main id="main"><section class="panel active">
+    <div class="day-intro">
+      <div class="blob-frame"><svg viewBox="0 0 60 60"><rect x="10" y="20" width="10" height="30" fill="var(--sky)"></rect><rect x="24" y="10" width="12" height="40" fill="var(--pink)"></rect><rect x="40" y="26" width="10" height="24" fill="var(--sky)"></rect></svg></div>
+      <div class="text">
+        <div class="day-banner"><span class="ed">東京市區</span></div><br>
+        <span class="date-badge"><span class="ed">抵達東京</span></span>
+        <p class="day-summary"><span class="ed">抵達成田機場，前往新宿一帶，晚上在附近逛街吃飯。</span></p>
+      </div>
+    </div>
+    <div class="timeline" id="timeline-d0">
+    <div class="stop">
+      
+      <div class="time"><span class="ed">17:35</span></div>
+      <div class="item"><span class="ed">東京成田機場</span></div>
+      <div class="meta">
+        <span>🚃 <span class="ed">Skyliner/JR山手線</span></span>
+        
+        <span>⏱ <span class="ed">搭車</span> <span class="ed">約1小時</span></span>
+        
+        
+      </div>
+      <div class="note-wrap">
+        <div class="note-text">京成 Skyliner ➔ 「日暮里站」轉 JR 山手線外環線(池袋・新宿方向)-「高田馬場站」
+JR 成田特快（N'EX）➔ 「新宿站」轉 JR 山手線外環線(池袋・新宿方向)-「高田馬場站」
+(外環線：男性語音廣播、月台門上為2條綠色線條)</div>
+        <span class="dwell">⏳ 停留 <span class="ed">20分鐘</span></span>
+        
+      </div>
+    </div>
+    <div class="stop highlight">
+      
+      <div class="time"><span class="ed">20:00</span></div>
+      <div class="item"><span class="ed">飯店 Check In</span></div>
+      <div class="meta">
+        <span>🚃 <span class="ed">JR 山手線</span></span>
+        
+        <span>⏱ <span class="ed">走路</span> <span class="ed">約7分鐘</span></span>
+        
+        
+      </div>
+      
+    </div></div>
+    
+    
+    <div class="food-block">
+      <div class="food-block-title">🍡 必吃必買推薦</div>
+      <div class="food-cards" id="food-d0">
+        <div class="food-card" data-idx="0">
+    <span class="food-tag"><span class="ed">美食</span></span>
+    <span class="food-name"><span class="ed"> 燒肉市場 げんかや 高田馬場店 (Yakiniku Genkaya)</span></span>
+    <span class="food-hours">🕒 <span class="ed">17:00-23:30</span></span>
+    
+  </div><div class="food-card" data-idx="1">
+    <span class="food-tag"><span class="ed">美食</span></span>
+    <span class="food-name"><span class="ed">Fry家（フライ家 炸豬排）</span></span>
+    <span class="food-hours">🕒 <span class="ed">17:30～22:00</span></span>
+    
+  </div><div class="food-card" data-idx="2">
+    <span class="food-tag"><span class="ed">超市</span></span>
+    <span class="food-name"><span class="ed">西友 高田馬場店</span></span>
+    <span class="food-hours">🕒 <span class="ed">24小時</span></span>
+    
+  </div><div class="food-card" data-idx="3">
+    <span class="food-tag"><span class="ed">藥妝</span></span>
+    <span class="food-name"><span class="ed">唐吉訶德 高田馬場站前店</span></span>
+    <span class="food-hours">🕒 <span class="ed">24小時</span></span>
+    
+  </div><div class="food-card" data-idx="4">
+    <span class="food-tag"><span class="ed">量販店</span></span>
+    <span class="food-name"><span class="ed">BIGBOX 高田馬場</span></span>
+    <span class="food-hours">🕒 <span class="ed">星期一至六 10:00～21:00、星期日及國定假日 10:00～20:00</span></span>
+    
+  </div>
+      </div>
+      
+    </div>
+  </section><section class="panel">
+    <div class="day-intro">
+      <div class="blob-frame"><svg viewBox="0 0 60 60"><polygon points="30,10 48,50 12,50" fill="var(--sky)"></polygon><polygon points="30,10 36,24 24,24" fill="#fff"></polygon></svg></div>
+      <div class="text">
+        <div class="day-banner"><span class="ed">富士山（河口湖）</span></div><br>
+        <span class="date-badge"><span class="ed">河口湖一日遊</span></span>
+        <p class="day-summary"><span class="ed">搭乘一日遊前往河口湖，新倉山公園、日川時計店、山中湖。</span></p>
+      </div>
+    </div>
+    <div class="timeline" id="timeline-d1">
+    <div class="stop">
+      
+      <div class="time"><span class="ed">7:50</span></div>
+      <div class="item"><span class="ed">高田馬場 </span></div>
+      <div class="meta">
+        <span>🚃 <span class="ed">山手線</span></span>
+        
+        <span>⏱ <span class="ed">搭車</span> <span class="ed">約 5 分鐘</span></span>
+        
+        
+      </div>
+      <div class="note-wrap">
+        <div class="note-text">從「高田馬場站」搭乘JR山手線外環(池袋、新宿、澀谷方向)-「新宿站」
+搭乘JR山手線。(外環線：男性語音廣播、月台門上為2條綠色線條)
+JR高田馬場站（月台：通常為 2 號月台）</div>
+        
+        
+      </div>
+    </div>
+    <div class="stop">
+      
+      <div class="time"><span class="ed">8:20</span></div>
+      <div class="item"><span class="ed">新宿i-Land Tower</span></div>
+      <div class="meta">
+        <span>🚃 <span class="ed">周遊巴士</span></span>
+        
+        <span>⏱ <span class="ed">搭車</span> <span class="ed">約 2 小時</span></span>
+        
+        
+      </div>
+      <div class="note-wrap">
+        <div class="note-text">從「新宿站」出來步行10分鐘
+KLOOK一日遊集合地點
+8:30集合 6-chōme-5-1 Nishishinjuku, Shinjuku City, Tokyo 163-1390, Japan</div>
+        
+        
+      </div>
+    </div>
+    <div class="stop">
+      
+      <div class="time"><span class="ed">10:00</span></div>
+      <div class="item"><span class="ed">新倉山公園</span></div>
+      <div class="meta">
+        <span>🚃 <span class="ed">周遊巴士</span></span>
+        
+        <span>⏱ <span class="ed">搭車</span> <span class="ed">停留約 1 小時</span></span>
+        
+        
+      </div>
+      
+    </div>
+    <div class="stop highlight">
+      
+      <div class="time"><span class="ed">11:00</span></div>
+      <div class="item"><span class="ed">日川時計店</span></div>
+      <div class="meta">
+        <span>🚃 <span class="ed">周遊巴士</span></span>
+        
+        <span>⏱ <span class="ed">搭車</span> <span class="ed">停留
+約 30 分鐘</span></span>
+        
+        
+      </div>
+      
+    </div>
+    <div class="stop">
+      
+      <div class="time"><span class="ed">11:30</span></div>
+      <div class="item"><span class="ed">下吉田</span></div>
+      <div class="meta">
+        <span>🚃 <span class="ed">周遊巴士、火車</span></span>
+        
+        <span>⏱ <span class="ed">搭車</span> <span class="ed">停留
+約 20 分鐘</span></span>
+        
+        
+      </div>
+      <div class="note-wrap">
+        <div class="note-text">「下吉田站」火車站搭到「河口湖站」</div>
+        
+        
+      </div>
+    </div>
+    <div class="stop highlight">
+      
+      <div class="time"><span class="ed">12:00</span></div>
+      <div class="item"><span class="ed">Lawson Fujiyoushida Arakura</span></div>
+      <div class="meta">
+        <span>🚃 <span class="ed">周遊巴士</span></span>
+        
+        <span>⏱ <span class="ed">搭車</span> <span class="ed">停留
+約 20 分鐘</span></span>
+        
+        
+      </div>
+      
+    </div>
+    <div class="stop">
+      
+      <div class="time"><span class="ed">12:30</span></div>
+      <div class="item"><span class="ed">河口湖散策</span></div>
+      <div class="meta">
+        <span>🚃 <span class="ed">周遊巴士</span></span>
+        
+        <span>⏱ <span class="ed">搭車</span> <span class="ed">停留
+約 2小時</span></span>
+        
+        
+      </div>
+      <div class="note-wrap">
+        <div class="note-text">可以去吃午餐</div>
+        
+        
+      </div>
+    </div>
+    <div class="stop">
+      
+      <div class="time"><span class="ed">15:00</span></div>
+      <div class="item"><span class="ed">山中湖</span></div>
+      <div class="meta">
+        <span>🚃 <span class="ed">周遊巴士</span></span>
+        
+        <span>⏱ <span class="ed">搭車</span> <span class="ed">停留
+約30分鐘</span></span>
+        
+        
+      </div>
+      
+    </div>
+    <div class="stop">
+      
+      <div class="time"><span class="ed">18:00</span></div>
+      <div class="item"><span class="ed">新宿i-Land Tower</span></div>
+      <div class="meta">
+        <span>🚃 <span class="ed">周遊巴士</span></span>
+        
+        <span>⏱ <span class="ed">搭車</span> <span class="ed">0</span></span>
+        
+        
+      </div>
+      <div class="note-wrap">
+        <div class="note-text">可以到新宿附近逛逛
+ABC Mart
+新宿伊勢丹</div>
+        
+        
+      </div>
+    </div>
+    <div class="stop">
+      
+      <div class="time"><span class="ed">18:05</span></div>
+      <div class="item"><span class="ed">新宿高島屋</span></div>
+      <div class="meta">
+        <span>🚃 <span class="ed">走路</span></span>
+        
+        <span>⏱ <span class="ed">搭車</span> <span class="ed">1個半小時</span></span>
+        
+        
+      </div>
+      <div class="note-wrap">
+        <div class="note-text">可以再裡面吃晚餐
+營業時間到19:30
+L'Occitane(2F)、Nojima電器(11F)
+*11樓的免稅櫃台</div>
+        
+        
+      </div>
+    </div></div>
+    
+    
+    
+  </section><section class="panel">
+    <div class="day-intro">
+      <div class="blob-frame"><svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="18" fill="none" stroke="var(--pink)" stroke-width="3"></circle><line x1="30" y1="12" x2="30" y2="48" stroke="var(--pink)" stroke-width="2"></line><line x1="12" y1="30" x2="48" y2="30" stroke="var(--pink)" stroke-width="2"></line><circle cx="30" cy="30" r="3" fill="var(--ink)"></circle></svg></div>
+      <div class="text">
+        <div class="day-banner"><span class="ed">川崎・橫濱・澀谷</span></div><br>
+        <span class="date-badge"><span class="ed">橫濱・澀谷</span></span>
+        <p class="day-summary"><span class="ed">藤子・F・不二雄博物館、橫濱港未來，晚上到澀谷。</span></p>
+      </div>
+    </div>
+    <div class="timeline" id="timeline-d2">
+    <div class="stop">
+      
+      <div class="time"><span class="ed">8:20-8:30</span></div>
+      <div class="item"><span class="ed">高田馬場出發</span></div>
+      <div class="meta">
+        <span>🚃 <span class="ed">JR 、小田急線</span></span>
+        
+        <span>⏱ <span class="ed">搭車</span> <span class="ed">約 45 分鐘</span></span>
+        
+        
+      </div>
+      <div class="note-wrap">
+        <div class="note-text">從「高田馬場站」搭乘JR山手線外環(池袋、新宿、澀谷方向)-「新宿站」
+「新宿站」轉搭小田急線(小田原、藤澤方向)-「登戶站」
+*確認電子看板有停靠「登戶（登戸／Noborito）」
+「登戶站」-出口方向：生田綠地／Ikuta Ryokuchi Exit）-「直達接駁巴士指標」</div>
+        
+        
+      </div>
+    </div>
+    <div class="stop highlight">
+      
+      <div class="time"><span class="ed">9:50～10:00</span></div>
+      <div class="item"><span class="ed">藤子・F・不二雄博物館</span></div>
+      <div class="meta">
+        <span>🚃 <span class="ed">參觀</span></span>
+        
+        <span>⏱ <span class="ed">搭車</span> <span class="ed">停留
+約 2.5 小時</span></span>
+        
+        
+      </div>
+      <div class="note-wrap">
+        <div class="note-text">如果到「登戶站」還早可以先去附近吃早餐再去搭接駁巴士
+票券時間為10:00</div>
+        <span class="dwell">⏳ 停留 <span class="ed">3小時</span></span>
+        
+      </div>
+    </div>
+    <div class="stop">
+      
+      <div class="time"><span class="ed">12:00</span></div>
+      <div class="item"><span class="ed">前往櫻木町</span></div>
+      <div class="meta">
+        <span>🚃 <span class="ed">接駁巴士 → 登戶</span></span>
+        
+        <span>⏱ <span class="ed">搭車</span> <span class="ed">約 40-45 分鐘</span></span>
+        
+        
+      </div>
+      <div class="note-wrap">
+        <div class="note-text">接駁車坐回「登戶站」-JR南武線往川崎方向到「川崎站」
+川崎站內轉乘JR 京濱東北・根岸線，往大船／磯子方向-「櫻木町站」</div>
+        
+        
+      </div>
+    </div>
+    <div class="stop">
+      
+      <div class="time"><span class="ed">13:00</span></div>
+      <div class="item"><span class="ed">吃飯時間</span></div>
+      <div class="meta">
+        <span>🚃 <span class="ed">午餐</span></span>
+        
+        <span>⏱ <span class="ed">搭車</span> <span class="ed">約1小時 </span></span>
+        
+        
+      </div>
+      <div class="note-wrap">
+        <div class="note-text">如果不吃飯可以加動物園。
+野毛山動物園(可去可不去。門票免費)
+動物園從櫻木町站步行約15分鐘</div>
+        
+        
+      </div>
+    </div>
+    <div class="stop">
+      
+      <div class="time"><span class="ed">14:00</span></div>
+      <div class="item"><span class="ed">YOKOHAMA AIR CABIN</span></div>
+      <div class="meta">
+        <span>🚃 <span class="ed">走路、纜車</span></span>
+        
+        <span>⏱ <span class="ed">搭車</span> <span class="ed">約5分鐘</span></span>
+        
+        
+      </div>
+      <div class="note-wrap">
+        <div class="note-text">纜車搭乘地方：「櫻木町站」
+纜車：櫻木町-運河公園
+KKDAY套票</div>
+        
+        
+      </div>
+    </div>
+    <div class="stop highlight">
+      
+      <div class="time"><span class="ed">14:30</span></div>
+      <div class="item"><span class="ed">COSMO CLOCK 21</span></div>
+      <div class="meta">
+        <span>🚃 <span class="ed">走路、搭乘摩天輪</span></span>
+        
+        <span>⏱ <span class="ed">搭車</span> <span class="ed">約2分鐘</span></span>
+        
+        
+      </div>
+      <div class="note-wrap">
+        <div class="note-text">摩天輪搭乘地方：「運河公園」
+纜車站出站後走天橋可以直接走到橫濱WORLD PORTERS(摩天輪在旁邊)
+摩天輪的車廂共有兩種，要搭乘透視車廂的請往左走， 一般車廂請往右
+KKDAY套票</div>
+        
+        
+      </div>
+    </div>
+    <div class="stop">
+      
+      <div class="time"><span class="ed">16:30</span></div>
+      <div class="item"><span class="ed">港未來、紅磚倉庫</span></div>
+      <div class="meta">
+        <span>🚃 <span class="ed">散步、拍照</span></span>
+        
+        <span>⏱ <span class="ed">搭車</span> <span class="ed">40分鐘</span></span>
+        
+        
+      </div>
+      <div class="note-wrap">
+        <div class="note-text">第一種：紅磚倉庫走路從「馬道車站」出發-搭乘港未來線(往澀谷方向)到「澀谷站」
+第二種：紅磚倉庫走路從「馬道車站」出發-搭乘東急東橫線到(往澀谷方向)「澀谷站」</div>
+        
+        
+      </div>
+    </div>
+    <div class="stop highlight">
+      
+      <div class="time"><span class="ed">17:30</span></div>
+      <div class="item"><span class="ed">澀谷</span></div>
+      <div class="meta">
+        <span>🚃 <span class="ed">逛街、看十字路口夜景</span></span>
+        
+        <span>⏱ <span class="ed">搭車</span> <span class="ed">約 1 小時</span></span>
+        
+        
+      </div>
+      <div class="note-wrap">
+        <div class="note-text">澀谷站搭搭乘JR山手線(外回り／池袋・上野方向)-「高田馬場站」</div>
+        
+        
+      </div>
+    </div></div>
+    
+    
+    <div class="food-block">
+      <div class="food-block-title">🍡 必吃必買推薦</div>
+      <div class="food-cards" id="food-d2">
+        <div class="food-card" data-idx="0">
+    <span class="food-tag"><span class="ed">美食街</span></span>
+    <span class="food-name"><span class="ed">澀谷橫丁</span></span>
+    <span class="food-hours">🕒 <span class="ed">週一～週六11:00～隔日5:00、週日11:00～23:00</span></span>
+    <span class="food-note"><span class="ed">RAYARD MIYASHITA PARK South 1F</span></span>
+  </div><div class="food-card" data-idx="1">
+    <span class="food-tag"><span class="ed">美食街</span></span>
+    <span class="food-name"><span class="ed">道玄坂、道玄坂小路</span></span>
+    <span class="food-hours">🕒 <span class="ed">週一～週五、國定假日前一日11:00～23:00；週末、國定假日10:30～23:00</span></span>
+    <span class="food-note"><span class="ed">自「渋谷」站步行約2分鐘</span></span>
+  </div><div class="food-card" data-idx="2">
+    <span class="food-tag"><span class="ed">百貨公司(商場)</span></span>
+    <span class="food-name"><span class="ed">澀谷 PARCO</span></span>
+    <span class="food-hours">🕒 <span class="ed">商場11:00～21:00；餐廳11:00～23:00</span></span>
+    <span class="food-note"><span class="ed">自「渋谷」站「A6-3」出口步行約3分鐘</span></span>
+  </div><div class="food-card" data-idx="3">
+    <span class="food-tag"><span class="ed">商場</span></span>
+    <span class="food-name"><span class="ed">澀谷 FUKURAS</span></span>
+    <span class="food-hours">🕒 <span class="ed">11:00～20:00（部分餐廳營業至23:00）</span></span>
+    <span class="food-note"><span class="ed">JR「渋谷」站西口步行1分鐘</span></span>
+  </div><div class="food-card" data-idx="4">
+    <span class="food-tag"><span class="ed">百貨公司</span></span>
+    <span class="food-name"><span class="ed">SHIBUYA109</span></span>
+    <span class="food-hours">🕒 <span class="ed">10:00～21:00</span></span>
+    
+  </div><div class="food-card" data-idx="5">
+    <span class="food-tag"><span class="ed">觀景台</span></span>
+    <span class="food-name"><span class="ed">MAGNET by SHIBUYA109</span></span>
+    <span class="food-hours">🕒 <span class="ed">觀景台10:00～22:00　※最終入場 21:30、10:00～21:00</span></span>
+    <span class="food-note"><span class="ed">1人1,800日圓（含稅價，附1杯飲料）</span></span>
+  </div>
+      </div>
+      
+    </div>
+  </section><section class="panel">
+    <div class="day-intro">
+      <div class="blob-frame"><svg viewBox="0 0 60 60"><rect x="14" y="14" width="6" height="34" fill="var(--pink-deep)"></rect><rect x="40" y="14" width="6" height="34" fill="var(--pink-deep)"></rect><rect x="12" y="16" width="36" height="5" fill="var(--pink-deep)"></rect><rect x="10" y="24" width="40" height="4" fill="var(--pink-deep)"></rect></svg></div>
+      <div class="text">
+        <div class="day-banner"><span class="ed">東京市區（淺草）</span></div><br>
+        <span class="date-badge"><span class="ed">秋葉原・淺草・銀座</span></span>
+        <p class="day-summary"><span class="ed">秋葉原、淺草寺、晴空塔、銀座，晚上六本木看夜景。</span></p>
+      </div>
+    </div>
+    <div class="timeline" id="timeline-d3">
+    <div class="stop">
+      
+      <div class="time"><span class="ed">8:30</span></div>
+      <div class="item"><span class="ed">高田馬場站</span></div>
+      <div class="meta">
+        <span>🚃 <span class="ed">JR山手線</span></span>
+        
+        <span>⏱ <span class="ed">搭車</span> <span class="ed">25-30分鐘</span></span>
+        
+        
+      </div>
+      <div class="note-wrap">
+        <div class="note-text">JR山手線「高田馬場站」(外環)往池袋/上野方向-「秋葉原站」</div>
+        
+        
+      </div>
+    </div>
+    <div class="stop">
+      
+      <div class="time"><span class="ed">09:00</span></div>
+      <div class="item"><span class="ed">秋葉原站</span></div>
+      <div class="meta">
+        <span>🚃 <span class="ed">步行</span></span>
+        
+        <span>⏱ <span class="ed">步行</span> <span class="ed">15分鐘</span></span>
+        
+        
+      </div>
+      <div class="note-wrap">
+        <div class="note-text">**位於東京JR秋葉原站6號月台上的牛乳專賣店「MILK SHOP LUCK RAKU酪」
+日本 Denny's 早午餐。秋葉原華盛頓飯店 2 樓
+Jonathan's Akihabara</div>
+        
+        
+      </div>
+    </div>
+    <div class="stop highlight">
+      
+      <div class="time"><span class="ed">9:40</span></div>
+      <div class="item"><span class="ed">神明神田</span></div>
+      <div class="meta">
+        <span>🚃 <span class="ed">步行</span></span>
+        
+        <span>⏱ <span class="ed">步行</span> <span class="ed">約7分鐘</span></span>
+        
+        
+      </div>
+      <div class="note-wrap">
+        <div class="note-text">從 JR「秋葉原站」（電器街口）步行約 7 分鐘
+Denny's 早午餐步行約14分鐘</div>
+        <span class="dwell">⏳ 停留 <span class="ed">15-20分鐘</span></span>
+        
+      </div>
+    </div>
+    <div class="stop">
+      
+      <div class="time"><span class="ed">10:00</span></div>
+      <div class="item"><span class="ed">電器街</span></div>
+      <div class="meta">
+        <span>🚃 <span class="ed">筑波快線</span></span>
+        
+        <span>⏱ <span class="ed">搭車</span> <span class="ed">5分鐘</span></span>
+        
+        
+      </div>
+      <div class="note-wrap">
+        <div class="note-text">*「秋葉原站」搭乘筑波快線-「淺草站」
+第二種：先步行到「末廣町站」搭乘東京地鐵銀座線-「淺草站」
+營業時間：10:00-19:00(愛電王秋葉原店）
+營業時間：10:00-19:00(BIC CAMERA 秋葉原店)</div>
+        
+        
+      </div>
+    </div>
+    <div class="stop highlight">
+      
+      <div class="time"><span class="ed">11:00</span></div>
+      <div class="item"><span class="ed">淺草</span></div>
+      <div class="meta">
+        <span>🚃 <span class="ed">淺草線</span></span>
+        
+        <span>⏱ <span class="ed">搭車</span> <span class="ed">3分鐘</span></span>
+        
+        
+      </div>
+      <div class="note-wrap">
+        <div class="note-text">淺草寺：「淺草站」步行約1分鐘
+仲見世通：「淺草站」步行約2分鐘。
+芋金：淺草滿願堂 仲見世店、銅鑼燒：龜十
+淺草用走的到晴空塔步行16分鐘</div>
+        <span class="dwell">⏳ 停留 <span class="ed">含午餐時間共3個半小時</span></span>
+        
+      </div>
+    </div>
+    <div class="stop">
+      
+      <div class="time"><span class="ed">14:30</span></div>
+      <div class="item"><span class="ed">墨田水族館</span></div>
+      <div class="meta">
+        <span>🚃 <span class="ed">走路</span></span>
+        
+        <span>⏱ <span class="ed">步行</span> <span class="ed">1分鐘</span></span>
+        
+        
+      </div>
+      <div class="note-wrap">
+        <div class="note-text">從「淺草站」搭乘淺草線(京成成田方向)前往「押上站」
+從「淺草站」搭乘東武晴空塔線「東京晴空塔站」</div>
+        <span class="dwell">⏳ 停留 <span class="ed">1.5小時</span></span>
+        
+      </div>
+    </div>
+    <div class="stop">
+      
+      <div class="time"><span class="ed">16:00</span></div>
+      <div class="item"><span class="ed">晴空塔</span></div>
+      <div class="meta">
+        <span>🚃 <span class="ed">都營淺草線</span></span>
+        
+        <span>⏱ <span class="ed">搭車</span> <span class="ed">15分鐘</span></span>
+        
+        
+      </div>
+      <div class="note-wrap">
+        <div class="note-text">祇園辻利(在晴空塔裡面)
+十間橋、隅田公園
+從「押上站」搭乘都營淺草線/Toei Asakusa Line (西馬込方向) 前往「東銀座站」</div>
+        
+        
+      </div>
+    </div>
+    <div class="stop">
+      
+      <div class="time"><span class="ed">16:15</span></div>
+      <div class="item"><span class="ed">東銀座站</span></div>
+      <div class="meta">
+        <span>🚃 <span class="ed">—</span></span>
+        
+        <span>⏱ <span class="ed">搭車</span> <span class="ed">25分鐘</span></span>
+        
+        
+      </div>
+      <div class="note-wrap">
+        <div class="note-text">*可以透過地下連通口或步行快速抵達銀座主要的精品與百貨公司
+*Uniqlo Ginza 步行五分鐘
+*GINZA SIX：出站後往 A1 出口方向前進，沿著地下長廊步行，途中跟著「GINZA SIX」指標前進，即可透過地下通道直接抵達館內。
+＊松屋銀座：「東銀座」站 A8 出口步行3分鐘
+*ON銀座旗艦店：「東銀座」站 A8、A2步行六分鐘(可能要抽號碼牌)
+*銀座三越：銀座站方面地下通路，步行約2分鐘。</div>
+        <span class="dwell">⏳ 停留 <span class="ed">2個小時</span></span>
+        
+      </div>
+    </div>
+    <div class="stop">
+      
+      <div class="time"><span class="ed">18:30</span></div>
+      <div class="item"><span class="ed">晚餐時間</span></div>
+      <div class="meta">
+        <span>🚃 <span class="ed">走路</span></span>
+        
+        <span>⏱ <span class="ed">步行</span> <span class="ed">2分鐘</span></span>
+        
+        
+      </div>
+      <div class="note-wrap">
+        <div class="note-text">銀座三越有便當可以買便當吃</div>
+        <span class="dwell">⏳ 停留 <span class="ed">3小時</span></span>
+        
+      </div>
+    </div>
+    <div class="stop highlight">
+      
+      <div class="time"><span class="ed">19:50</span></div>
+      <div class="item"><span class="ed">東銀座站</span></div>
+      <div class="meta">
+        <span>🚃 <span class="ed">日比谷線</span></span>
+        
+        <span>⏱ <span class="ed">搭車</span> <span class="ed">50分鐘</span></span>
+        
+        
+      </div>
+      <div class="note-wrap">
+        <div class="note-text">從「東銀座站」搭乘日比谷線(中目黑方向) 前往「六本木站」
+19:50-55一定要去坐車。</div>
+        <span class="dwell">⏳ 停留 <span class="ed">１小時</span></span>
+        
+      </div>
+    </div>
+    <div class="stop">
+      
+      <div class="time"><span class="ed">21:00</span></div>
+      <div class="item"><span class="ed">六本木之丘＋森大樓夜景</span></div>
+      <div class="meta">
+        <span>🚃 <span class="ed">—</span></span>
+        
+        <span>⏱ <span class="ed">搭車</span> <span class="ed">—</span></span>
+        
+        
+      </div>
+      <div class="note-wrap">
+        <div class="note-text">門票需要從官方點，21:00門票</div>
+        
+        
+      </div>
+    </div></div>
+    
+    
+    <div class="food-block">
+      <div class="food-block-title">🍡 必吃必買推薦</div>
+      <div class="food-cards" id="food-d3">
+        <div class="food-card" data-idx="0">
+    <span class="food-tag"><span class="ed">電器街</span></span>
+    <span class="food-name"><span class="ed">愛電王（秋葉原店）</span></span>
+    <span class="food-hours">🕒 <span class="ed">10:00-19:00</span></span>
+    
+  </div><div class="food-card" data-idx="1">
+    <span class="food-tag"><span class="ed">電器街</span></span>
+    <span class="food-name"><span class="ed">BIC CAMERA（秋葉原店）</span></span>
+    <span class="food-hours">🕒 <span class="ed">10:00-19:00</span></span>
+    
+  </div><div class="food-card" data-idx="2">
+    <span class="food-tag"><span class="ed">早餐</span></span>
+    <span class="food-name"><span class="ed"> Denny's 早午餐 </span></span>
+    <span class="food-hours">🕒 <span class="ed">6:30-11:00</span></span>
+    <span class="food-note"><span class="ed">秋葉原站步行約1分鐘。秋葉原華盛頓飯店 2 樓</span></span>
+  </div><div class="food-card" data-idx="3">
+    <span class="food-tag"><span class="ed">晚餐天婦羅</span></span>
+    <span class="food-name"><span class="ed">銀座天國本店</span></span>
+    <span class="food-hours">🕒 <span class="ed">週一〜六11:30〜22:00</span></span>
+    <span class="food-note"><span class="ed">地鐵銀座線新橋站1號出口步行約5分鐘
+地鐵銀座站 A3 出口步行約7分鐘</span></span>
+  </div><div class="food-card" data-idx="4">
+    <span class="food-tag"><span class="ed">晚餐燒肉</span></span>
+    <span class="food-name"><span class="ed">焼肉の名門 天壇 銀座店</span></span>
+    <span class="food-hours">🕒 <span class="ed">17:00到假日晚間22:00</span></span>
+    <span class="food-note"><span class="ed">地鐵東銀座站4號出口步行約1分鐘
+地鐵銀座站步行約5分鐘
+*平均價格：8000-10000日圓</span></span>
+  </div><div class="food-card" data-idx="5">
+    <span class="food-tag"><span class="ed">晚餐燒肉</span></span>
+    <span class="food-name"><span class="ed">焼肉 炙屋武蔵</span></span>
+    <span class="food-hours">🕒 <span class="ed">17:00〜23:30</span></span>
+    <span class="food-note"><span class="ed">*平均價格：6,000〜9,000日圓</span></span>
+  </div><div class="food-card" data-idx="6">
+    <span class="food-tag"><span class="ed">壽司</span></span>
+    <span class="food-name"><span class="ed">梅丘壽司 美登利 總本店 銀座店</span></span>
+    <span class="food-hours">🕒 <span class="ed">週一〜五11:00〜15:00、17:00〜21:00（L.O.20:30）
+週末假日11:00〜21:00</span></span>
+    <span class="food-note"><span class="ed">*平均價格：約3,000〜4,000日圓</span></span>
+  </div><div class="food-card" data-idx="7">
+    <span class="food-tag"><span class="ed">雞白湯</span></span>
+    <span class="food-name"><span class="ed">銀座 篝 本店</span></span>
+    <span class="food-hours">🕒 <span class="ed">11:00〜15:30、17:30〜22:00</span></span>
+    <span class="food-note"><span class="ed">*平均價格：1,000〜2,000日圓</span></span>
+  </div><div class="food-card" data-idx="8">
+    <span class="food-tag"><span class="ed">雞白湯</span></span>
+    <span class="food-name"><span class="ed">麥與橄欖 銀座店</span></span>
+    <span class="food-hours">🕒 <span class="ed">11:00〜21:30</span></span>
+    <span class="food-note"><span class="ed">*平均價格：1,000〜2,000日圓</span></span>
+  </div>
+      </div>
+      
+    </div>
+  </section><section class="panel">
+    <div class="day-intro">
+      <div class="blob-frame"><svg viewBox="0 0 60 60"><polygon points="10,34 50,26 40,32 50,38" fill="var(--sky)"></polygon><polygon points="10,34 22,30 22,38" fill="var(--pink)"></polygon></svg></div>
+      <div class="text">
+        <div class="day-banner"><span class="ed">回程</span></div><br>
+        <span class="date-badge"><span class="ed">回程</span></span>
+        <p class="day-summary"><span class="ed">整理行李，前往機場。</span></p>
+      </div>
+    </div>
+    <div class="timeline" id="timeline-d4">
+    <div class="stop">
+      
+      <div class="time"><span class="ed">9:50</span></div>
+      <div class="item"><span class="ed">前往機場</span></div>
+      <div class="meta">
+        <span>🚃 <span class="ed">—</span></span>
+        
+        <span>⏱ <span class="ed">搭車</span> <span class="ed">—</span></span>
+        
+        
+      </div>
+      
+    </div></div>
+    
+    
+  </section></main>
+
+
+
+
+<input type="file" accept="image/*" multiple="" style="display: none;">
+
+
+
+<script>(function(){var b=document.querySelectorAll('.daynav button'),p=document.querySelectorAll('main > .panel');b.forEach(function(x,i){x.addEventListener('click',function(){p.forEach(function(e,j){e.classList.toggle('active',i===j)});b.forEach(function(e,j){e.classList.toggle('active',i===j)});});});})();</script></body></html>
